@@ -1,0 +1,72 @@
+#
+# ========== Scalars
+#
+
+scalar DateTime
+scalar JSON
+
+#
+# ========== Interfaces
+#
+
+interface Node {
+  id: ID!
+}
+
+interface Timestamp {
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+#
+# ========== Object Types / Shared
+#
+
+type Location {
+  addressLine1: String
+  addressLine2: String
+  zipCode: String
+  state: String
+  province: String
+  country: Country!
+}
+
+#
+# ========== Object Types / Entities
+#
+
+type Comment implements Node, Timestamp {
+  id: ID!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  slug: String!
+  name: String!
+  body: String!
+}
+
+type User implements Node, Timestamp {
+  id: ID!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  avatar: String
+  firstName: String!
+  lastName: String!
+  email: String!
+  password: String!
+  status: Status!
+}
+
+#
+# ========== Enums
+#
+
+enum Status {
+  Archived
+  Active
+  Unconfirmed
+}
+
+enum Country {
+  USA
+  CA
+}
